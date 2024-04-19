@@ -1,0 +1,48 @@
+@for(prod of cartprods ; track $index){
+<div
+  class="box py-3 d-flex my-auto justify-content-around align-items-center w-75 mx-auto"
+  justify-content-around
+  align-items-center
+  style="margin: 0; border: 2px solid black"
+>
+  <div class="product d-flex justify-content-around w-50">
+    <div>
+      <img
+        [src]="prod.images[0]"
+        alt=""
+        class="d-block"
+        width="120px"
+        height="150px"
+      />
+    </div>
+
+    <div class="inf">
+      <p>{{ prod.title }}</p>
+      <p class="catagory">{{ prod.category }}</p>
+      <p class="price">{{ prod.price }}</p>
+    </div>
+  </div>
+
+  <div class="counter d-flex justify-content-center">
+    <button class="btn btn-danger fw-bold" (click)="decrease($index)">
+      -1
+    </button>
+    <p
+      class="d-block align-items-center fs-4 fw-bold"
+      style="width: 30px; text-align: center"
+    >
+      {{ counterarray[$index] }}
+    </p>
+    <button class="btn btn-primary fw-bold" (click)="increase($index)">
+      +1
+    </button>
+  </div>
+  <div class="price">
+    <p class="price">{{ calculateSinglePrice($index) }}</p>
+  </div>
+</div>
+}
+
+<h3 class="text-danger text-center py-4">
+  total price : <span class="text-primary">{{ calculateTotalPrice() }}</span>
+</h3>

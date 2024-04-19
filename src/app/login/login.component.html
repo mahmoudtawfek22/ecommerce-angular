@@ -1,0 +1,56 @@
+<form #loginForm="ngForm" (ngSubmit)="handleSubmitForm(loginForm)">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      required
+      name="useremail"
+      ngModel
+      pattern="^[A-Za-z0-9._+\-\']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
+      #useremail="ngModel"
+    />
+    @if(useremail.touched&&useremail.invalid){
+    <div id="emailHelp" class="form-text text-danger">
+      @if(useremail.errors?.["required"]){
+      <small>this fied is required</small>
+      } @if (useremail.errors?.["pattern"]) {
+      <small>this text not match email pattern</small>
+      }
+    </div>
+
+    }
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="exampleInputPassword1"
+      name="userpassword"
+      ngModel
+      required
+      minlength="6"
+      #userpass="ngModel"
+    />
+    @if(userpass.touched&&userpass.invalid){
+    <div id="emailHelp" class="form-text text-danger">
+      @if(userpass.errors?.["required"]){
+      <small>this fied is required</small>
+      } @if(userpass.errors?.["minlength"]){
+      <small>minimum length is 6</small>
+      }
+    </div>
+
+    }
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+    Submit
+  </button>
+</form>

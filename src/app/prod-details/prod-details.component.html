@@ -1,0 +1,33 @@
+<div class="container">
+  <main>
+    <div class="left-side">
+      <div class="img">
+        <img [src]="proddetails.images[selctedindex]" id="thumbnail" />
+      </div>
+      <div class="remaingin-images d-flex flex-lg-nowrap flex-md-wrap">
+        @for (image of proddetails.images; track $index) {
+        <img [src]="image" (click)="view($index)" style="width: 100px" alt="" />
+        }
+      </div>
+    </div>
+    <div class="right-side">
+      <div id="brand">{{ proddetails.brand }}</div>
+      <div class="product-name" id="title">{{ proddetails.title }}</div>
+      <div class="product-price" id="price">{{ proddetails.price }}$</div>
+      <div class="product-rate">
+        <span><i class="fas fa-star"></i></span>
+        <span id="rating"></span>
+      </div>
+      <p class="product-description" id="description">
+        {{ proddetails.description }}
+      </p>
+      <div class="btns mx-auto">
+        <input
+          type="button"
+          class="btn btn-warning m-3 mx-auto d-block"
+          value="Add To Cart"
+        />
+      </div>
+    </div>
+  </main>
+</div>

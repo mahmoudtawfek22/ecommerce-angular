@@ -1,0 +1,199 @@
+<form [formGroup]="registerForm" (ngSubmit)="handleSubmitForm()">
+  <div class="mb-3">
+    <label for="example" class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="example"
+      name="username"
+      formControlName="Name"
+    />
+    @if(registerForm.controls["Name"].touched&&registerForm.controls["Name"].invalid){
+    <div id="emailHelp" class="form-text text-danger">
+      @if(registerForm.controls["Name"].errors?.["required"]){
+      <small>this fied is required</small>
+      }
+    </div>
+
+    }
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      name="useremail"
+      formControlName="userEmail"
+    />
+    @if(registerForm.controls["userEmail"].touched&&registerForm.controls["userEmail"].invalid){
+    <div id="emailHelp" class="form-text text-danger">
+      @if(registerForm.controls["userEmail"].errors?.["required"]){
+      <small>this fied is required</small>
+      } @if (registerForm.controls["userEmail"].errors?.["email"]) {
+      <small>this text not match email pattern</small>
+      }
+    </div>
+
+    }
+  </div>
+  <div class="mb-3">
+    <label for="exampleInput" class="form-label">User Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInput"
+      name="userName"
+      formControlName="userName"
+      (keydown.space)="$event.preventDefault()"
+    />
+    @if(registerForm.controls["userName"].touched&&registerForm.controls["userName"].invalid){
+    <div id="emailHelp" class="form-text text-danger">
+      @if(registerForm.controls["userName"].errors?.["required"]){
+      <small>this fied is required</small>
+      } @if(registerForm.controls["userName"].errors?.["pattern"]){
+      <small>dont match</small>
+      }
+    </div>
+
+    }
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="exampleInputPassword1"
+      name="userpassword"
+      formControlName="userPass"
+    />
+    @if(registerForm.controls["userPass"].touched&&registerForm.controls["userPass"].invalid){
+    <div id="emailHelp" class="form-text text-danger">
+      @if(registerForm.controls["userPass"].errors?.["required"]){
+      <small>this fied is required</small>
+      } @if(registerForm.controls["userPass"].errors?.["minlength"]){
+      <small>minimum length is 6</small>
+      } @if(registerForm.controls["userPass"].errors?.["pattern"]){
+      <small>this password not match password pattern</small>
+      }
+    </div>
+
+    }
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="registerForm.invalid"
+  >
+    Submit
+  </button>
+</form>
+
+<!-- .............................................................. -->
+
+<!-- with template driven form -->
+
+<!-- 
+<form #registerForm="ngForm" (ngSubmit)="handleSubmitForm(registerForm)">
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputPassword1"
+      name="username"
+      ngModel
+      required
+      #userName="ngModel"
+    />
+    @if(userName.touched&&userName.invalid){
+    <div id="emailHelp" class="form-text text-danger">
+      @if(userName.errors?.["required"]){
+      <small>this fied is required</small>
+      }
+    </div>
+
+    }
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      required
+      name="useremail"
+      ngModel
+      pattern="^[A-Za-z0-9._+\-\']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$"
+      #useremail="ngModel"
+    />
+    @if(useremail.touched&&useremail.invalid){
+    <div id="emailHelp" class="form-text text-danger">
+      @if(useremail.errors?.["required"]){
+      <small>this fied is required</small>
+      } @if (useremail.errors?.["pattern"]) {
+      <small>this text not match email pattern</small>
+      }
+    </div>
+
+    }
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">User Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputPassword1"
+      name="user_userName"
+      ngModel
+      required
+      #user_userName="ngModel"
+      (keydown.space)="$event.preventDefault()"
+    />
+    @if(user_userName.touched&&user_userName.invalid){
+    <div id="emailHelp" class="form-text text-danger">
+      @if(user_userName.errors?.["required"]){
+      <small>this fied is required</small>
+      }
+    </div>
+
+    }
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="exampleInputPassword1"
+      name="userpassword"
+      ngModel
+      required
+      minlength="6"
+      pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+      #userpass="ngModel"
+    />
+    @if(userpass.touched&&userpass.invalid){
+    <div id="emailHelp" class="form-text text-danger">
+      @if(userpass.errors?.["required"]){
+      <small>this fied is required</small>
+      } @if(userpass.errors?.["minlength"]){
+      <small>minimum length is 6</small>
+      } @if(userpass.errors?.["pattern"]){
+      <small>this password not match password pattern</small>
+      }
+    </div>
+
+    }
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="registerForm.invalid"
+  >
+    Submit
+  </button>
+</form> -->
